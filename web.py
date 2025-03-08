@@ -1,7 +1,7 @@
 import streamlit as st
 from rawmap import actualizar
 import requests
-url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=http://localhost:8502&response_type=code&scope=activity:read_all"
+url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=https://mapitas.streamlit.app&response_type=code&scope=activity:read_all"
 st.write("check out this [link](%s)" % url)
 
     # Step 3: Retrieve the authorization code from the redirected URL
