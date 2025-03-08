@@ -32,12 +32,14 @@ if button:
             actualizar(refresh_token)
     except Exception as e:
             st.error(f"An error occurred: {e}")
+try:
+        path_to_html = "./templates/stravastreamlit.html"
 
-path_to_html = "./templates/stravastreamlit.html"
+        # Read file and keep in variable
+        with open(path_to_html,'r') as f: 
+                html_data = f.read()
 
-# Read file and keep in variable
-with open(path_to_html,'r') as f: 
-    html_data = f.read()
-
-## Show in webpage
-st.components.v1.html(html_data,height=500)
+        ## Show in webpage
+        st.components.v1.html(html_data,height=500)
+except Exception:
+       None
