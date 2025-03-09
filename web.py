@@ -12,7 +12,7 @@ if "code" in query_params and auth_code is None:
         st.rerun()  # Force a rerun to capture query parameters
 
 if auth_code:
-        st.success(f"Authorization Code: {auth_code}")
+        #st.success(f"Authorization Code: {auth_code}")
         codigo=1
 else:
         st.warning("No authorization code found. Please authorize the app.")
