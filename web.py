@@ -32,14 +32,14 @@ if st.session_state["button"]:
             nombre_atleta=response["athlete"]["firstname"]
             id_atleta= response["athlete"]["id"]
             refresh_token=response["refresh_token"]
-            actualizar(refresh_token,nombre_atleta)
+            actualizar(refresh_token)
     except Exception as e:
             st.error(f"An error occurred: {e}")
 try:
         path_to_html = "./templates/stravastreamlit.html"
 
         # Read file and keep in variable
-        temp_path = f"/tmp/{nombre_atleta}/stravastreamlit.html"
+        temp_path = f"/tmp/stravastreamlit.html"
         with open(temp_path,'r') as f: 
                 html_data = f.read()
 
