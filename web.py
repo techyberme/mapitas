@@ -1,8 +1,10 @@
 import streamlit as st
 from rawmap import actualizar
 import requests
+st.title("Mapitas")
+st.subheader("Powered by orange[Strava]")
 url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=https://mapitas.streamlit.app&response_type=code&scope=activity:read_all"
-st.write("Consigue los datos aqui: [link](%s)" % url)
+#st.write("Consigue los datos aqui: [link](%s)" % url)
 
     # Step 3: Retrieve the authorization code from the redirected URL
 query_params = st.query_params  # Capture URL parameters
@@ -12,10 +14,11 @@ if "code" in query_params and auth_code is None:
         st.rerun()  # Force a rerun to capture query parameters
 
 if auth_code:
-        #st.success(f"Authorization Code: {auth_code}")
-        codigo=1
+        st.session_state["authenticated"] = True  # Mark user as authenticated
+        st.write("✅ Ya estás registrado, ahora puedes ver tu mapa!")
+
 else:
-        st.warning("No authorization code found. Please authorize the app.")
+        st.write("🔗 Consigue los datos aqui: [link](%s)" % url)
 
 
 button=st.button("Pulsa para la magia")
