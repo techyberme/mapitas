@@ -55,7 +55,9 @@ def actualizar(refresh_token :str):
     map_title = "Las rutas"
     title_html = f'<h1 style="position:absolute;z-index:100000;left:40vw" >{map_title}</h1>'
     l.get_root().html.add_child(folium.Element(title_html))
-    l.save("./templates/stravastreamlit.html")
+    #l.save("./templates/stravastreamlit.html")
+    temp_path = "/tmp/stravastreamlit.html"
+    l.save(temp_path)
 
 
 
