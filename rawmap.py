@@ -1,6 +1,7 @@
 from polyline import decode
 import folium
 import requests
+from folium.plugins import Fullscreen
 def actualizar(refresh_token :str):
     try:
         # Actualizo el token
@@ -51,7 +52,7 @@ def actualizar(refresh_token :str):
             tooltip=f"Nombre: {nombre} \n , Distancia: {distancia} km \n , Velocidad = {vel} min/km"
             ).add_to(l)
     
-    
+    Fullscreen(position="topright").add_to(l)
     map_title = "Las rutas"
     title_html = f'<h1 style="position:absolute;z-index:100000;left:40vw" >{map_title}</h1>'
     l.get_root().html.add_child(folium.Element(title_html))
