@@ -22,7 +22,7 @@ else:
 
 
 st.session_state["button"]=st.button("Pulsa para la magia")
-if "button" in st.session_state:  
+if st.session_state["button"]:  
     url_refresh=f"https://www.strava.com/oauth/token?client_id=143763&client_secret=9ddc6c13807019d306436f8f13972b2936a26e47&code={st.session_state["auth_code"]}&grant_type=authorization_code"
     try:     # Sending POST request with data as JSON
             response = requests.post(url_refresh)
