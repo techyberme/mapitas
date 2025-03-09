@@ -36,7 +36,8 @@ if "code" in query_params and st.session_state["auth_code"]:
                 refresh_token=response["refresh_token"]
                 actualizar(refresh_token)
         except Exception as e:
-                st.error(f"An error occurred: {e}")
+                #st.error(f"An error occurred: {e}")
+                None
 
         if st.session_state["button"]:            
                 try:
