@@ -13,7 +13,7 @@ st.session_state["auth_code"] = query_params.get("code")
 if "code" in query_params and st.session_state["auth_code"] is None:
         st.rerun()  # Force a rerun to capture query parameters
 
-if "auth_code" in st.session_state:
+if "code" in query_params and st.session_state["auth_code"]:
         st.session_state["authenticated"] = True  # Mark user as authenticated
         st.write("✅ Ya estás registrado, ahora puedes ver tu mapa!")
 
