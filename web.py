@@ -35,15 +35,17 @@ if st.session_state["button"]:
             actualizar(refresh_token)
     except Exception as e:
             st.error(f"An error occurred: {e}")
-try:
-        path_to_html = "./templates/stravastreamlit.html"
 
-        # Read file and keep in variable
-        temp_path = f"/tmp/stravastreamlit.html"
-        with open(temp_path,'r') as f: 
-                html_data = f.read()
+if st.session_state["button"]:            
+        try:
+                path_to_html = "./templates/stravastreamlit.html"
 
-        ## Show in webpage
-        st.components.v1.html(html_data,height=500)
-except Exception:
-       None
+                # Read file and keep in variable
+                temp_path = f"/tmp/stravastreamlit.html"
+                with open(temp_path,'r') as f: 
+                        html_data = f.read()
+
+                ## Show in webpage
+                st.components.v1.html(html_data,height=500)
+        except Exception:
+                None
