@@ -1,7 +1,7 @@
 from polyline import decode
 import folium
 import requests
-def actualizar(refresh_token :str):
+def actualizar(refresh_token :str, nombre_atleta :str):
     try:
         # Actualizo el token
         response = requests.post(f"https://www.strava.com/oauth/token?client_id=143763&client_secret=9ddc6c13807019d306436f8f13972b2936a26e47&refresh_token={refresh_token}&grant_type=refresh_token")
@@ -56,7 +56,7 @@ def actualizar(refresh_token :str):
     title_html = f'<h1 style="position:absolute;z-index:100000;left:40vw" >{map_title}</h1>'
     l.get_root().html.add_child(folium.Element(title_html))
     #l.save("./templates/stravastreamlit.html")
-    temp_path = "/tmp/stravastreamlit.html"
+    temp_path = f"/tmp/{nombre_atleta}/stravastreamlit.html"
     l.save(temp_path)
 
 

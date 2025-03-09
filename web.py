@@ -8,12 +8,12 @@ url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=http
 
     # Step 3: Retrieve the authorization code from the redirected URL
 query_params = st.query_params  # Capture URL parameters
-auth_code = query_params.get("code")
+st.session_state["auth_code"] = query_params.get("code")
 
-if "code" in query_params and auth_code is None:
+if "code" in query_params and st.session_state["auth_code"] is None:
         st.rerun()  # Force a rerun to capture query parameters
 
-if auth_code:
+if "auth_code" in st.session_state:
         st.session_state["authenticated"] = True  # Mark user as authenticated
         st.write("✅ Ya estás registrado, ahora puedes ver tu mapa!")
 
@@ -21,9 +21,9 @@ else:
         st.write("🔗 Consigue los datos aqui: [link](%s)" % url)
 
 
-button=st.button("Pulsa para la magia")
-if button:
-    url_refresh=f"https://www.strava.com/oauth/token?client_id=143763&client_secret=9ddc6c13807019d306436f8f13972b2936a26e47&code={auth_code}&grant_type=authorization_code"
+st.session_state["button"]=st.button("Pulsa para la magia")
+if "button" in st.session_state:  
+    url_refresh=f"https://www.strava.com/oauth/token?client_id=143763&client_secret=9ddc6c13807019d306436f8f13972b2936a26e47&code={st.session_state["auth_code"]}&grant_type=authorization_code"
     try:     # Sending POST request with data as JSON
             response = requests.post(url_refresh)
             # Check if the request was successful
@@ -32,14 +32,14 @@ if button:
             nombre_atleta=response["athlete"]["firstname"]
             id_atleta= response["athlete"]["id"]
             refresh_token=response["refresh_token"]
-            actualizar(refresh_token)
+            actualizar(refresh_token,nombre_atleta)
     except Exception as e:
             st.error(f"An error occurred: {e}")
 try:
         path_to_html = "./templates/stravastreamlit.html"
 
         # Read file and keep in variable
-        temp_path = "/tmp/stravastreamlit.html"
+        temp_path = f"/tmp/{nombre_atleta}/stravastreamlit.html"
         with open(temp_path,'r') as f: 
                 html_data = f.read()
 
