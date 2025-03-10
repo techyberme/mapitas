@@ -56,6 +56,21 @@ def actualizar(refresh_token :str):
     map_title = "Las rutas"
     title_html = f'<h1 style="position:absolute;z-index:100000;left:40vw" >{map_title}</h1>'
     l.get_root().html.add_child(folium.Element(title_html))
+    legend_html = '''
+<div style="position: fixed; 
+     bottom: 50px; left: 50px; width: 200px; height: 80px; 
+     border: 0.0000001px solid grey; z-index: 9999; font-size: 14px;
+     background-color: rgba(255, 255, 255, 0.05); padding: 10px;">
+     &nbsp; Ciclismo &nbsp; <i class="fa fa-minus" style="color:blue"></i><br>
+     &nbsp; Carrera &nbsp; <i class="fa fa-minus" style="color:green"></i><br>
+     &nbsp; Otros &nbsp; <i class="fa fa-minus" style="color:red"></i><br>
+</div>
+'''
+
+
+
+# Add the legend to the map
+    l.get_root().html.add_child(folium.Element(legend_html))
     #l.save("./templates/stravastreamlit.html")
     temp_path = f"/tmp/stravastreamlit.html"
     l.save(temp_path)
