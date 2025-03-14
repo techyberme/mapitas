@@ -1,6 +1,7 @@
 import streamlit as st
 from rawmap import actualizar
 import requests
+import matplotlib.pyplot as plt
 st.title("Mapitas")
 st.subheader("Powered by :orange[Strava]")
 url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=https://mapitas.streamlit.app&response_type=code&scope=activity:read_all"
@@ -38,7 +39,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         #st.error(f"An error occurred: {e}")
                         None
         st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
-        if st.session_state["graf"]=="Mapa":            
+        if st.session_state["graf"]=="Mapa" and st.session_state["button"]:            
                 try:
                         path_to_html = "./templates/stravastreamlit.html"
 
@@ -51,5 +52,5 @@ if "code" in query_params and st.session_state["auth_code"]:
                         st.components.v1.html(html_data,height=500)
                 except Exception:
                         None
-        if st.session_state["graf"]=="kms Acumulados": 
+        if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
                 st.plotly_chart(fig)
