@@ -42,8 +42,9 @@ if "code" in query_params and st.session_state["auth_code"]:
                                 st.session_state["map_html"] = f.read()
                         
                 except Exception as e:
-                        #st.error(f"An error occurred: {e}")
-                        None
+                        st.error(f"An error occurred: {e}")
+                        st.warning("Es el error de la url")
+                        
         st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
         if st.session_state["graf"] == "Mapa" and st.session_state["map_html"]:  
                 st.components.v1.html(st.session_state["map_html"], height=500)
