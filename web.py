@@ -35,7 +35,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         id_atleta= response["athlete"]["id"]
                         refresh_token=response["refresh_token"]
                         fig=actualizar(refresh_token)
-                        st.plotly_chart(fig)
+                        
                 except Exception as e:
                         #st.error(f"An error occurred: {e}")
                         None
@@ -54,4 +54,4 @@ if "code" in query_params and st.session_state["auth_code"]:
                 except Exception:
                         None
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
-                None
+                st.pyplot(fig)
