@@ -45,8 +45,13 @@ if "code" in query_params and st.session_state["auth_code"]:
                         #st.error(f"An error occurred: {e}")
                         None
         st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
-        if st.session_state["graf"] == "Mapa" and st.session_state["map_html"]:  
-                st.components.v1.html(st.session_state["map_html"], height=500)
+        if st.session_state["graf"] == "Mapa":  
+                try:
+                        with open("./templates/stravastreamlit.html", "r") as f:
+                                st.session_state["map_html"] = f.read()  # ✅ Reload the map HTML
+                        st.components.v1.html(st.session_state["map_html"], height=500)
+                except Exception:
+                        st.warning("No se pudo cargar el mapa. Presiona el botón nuevamente.")
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["fig"] is not None: 
                         st.pyplot(st.session_state["fig"])  # Use st.plotly_chart(fig) if it's Plotly
         elif st.session_state["graf"] == "kms Acumulados":
