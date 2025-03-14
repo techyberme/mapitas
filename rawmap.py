@@ -2,6 +2,13 @@ from polyline import decode
 import folium
 import requests
 from folium.plugins import Fullscreen
+from collections import defaultdict
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+import numpy as np
+inicio=[]
+final=[]
+distancias= defaultdict(list)
 def actualizar(refresh_token :str):
     try:
         # Actualizo el token
@@ -29,6 +36,23 @@ def actualizar(refresh_token :str):
         deporte=stats[i]["sport_type"]
         distancia= round(stats[i]["distance"]/1000,2)
         nombre=stats[i]["name"]
+        fecha=stats[i]["start_date_local"]
+        duracion=stats[i]["elapsed_time"]
+        fechain=datetime.strptime(fecha, "%Y-%m-%dT%H:%M:%SZ")
+        dia=fecha[8:10]+fecha[4:8]+fecha[0:4]   
+        #horain= datetime.strptime(fechain, "%H:%M:%S")
+    # Add 30 seconds
+        horafin = fechain + timedelta(seconds=duracion)
+        
+        # Format back to a string
+        horafin = [horafin.strftime("%w"),horafin.strftime("%H:%M:%S")]
+        horain=[fechain.strftime("%w"),fechain.strftime("%H:%M:%S")]
+
+        inicio.append(horain)
+        final.append(horafin)
+        dia=datetime.strftime(fechain, "%j")  
+        year=int(str(fechain)[0:4])
+        distancias[str(year)].append([int(dia),distancia])
         if deporte == "Walk":
             gradiente= 255-int(distancia*255/40)
             colores= f"rgb({gradiente}, 0, 0)"
@@ -69,12 +93,34 @@ def actualizar(refresh_token :str):
 
 
 
+
 # Add the legend to the map
     l.get_root().html.add_child(folium.Element(legend_html))
     #l.save("./templates/stravastreamlit.html")
     temp_path = f"/tmp/stravastreamlit.html"
     l.save(temp_path)
+    def kmsacumulados(distancias):
+        fig, ax = plt.subplots(figsize=(8, 5))
 
+        # Loop through each year in the dictionary
+        for year, data in distancias.items():
+            data = np.array(data)  # Convert to NumPy array
+            days = np.flip(data[:, 0]) # Extract day numbers
+            distances = data[:, 1]  # Extract distances
+            cumulative_km = np.cumsum(distances)  # Compute cumulative sum
+
+            ax.plot(days, cumulative_km, marker="x",markersize=5, linestyle="-", label=f"Year {year}")
+
+        # Customize plot
+        ax.set_xlabel("Día")
+        ax.set_ylabel("kms")
+        ax.set_title("kms acumulados")
+        ax.grid(True)
+        ax.legend()
+        return(fig)
+    fig=kmsacumulados(distancias)
+
+    return(fig)
 
 
 

@@ -33,12 +33,12 @@ if "code" in query_params and st.session_state["auth_code"]:
                         nombre_atleta=response["athlete"]["firstname"]
                         id_atleta= response["athlete"]["id"]
                         refresh_token=response["refresh_token"]
-                        actualizar(refresh_token)
+                        fig=actualizar(refresh_token)
                 except Exception as e:
                         #st.error(f"An error occurred: {e}")
                         None
-
-        if st.session_state["button"]:            
+        st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
+        if st.session_state["graf"]=="Mapa":            
                 try:
                         path_to_html = "./templates/stravastreamlit.html"
 
@@ -51,3 +51,5 @@ if "code" in query_params and st.session_state["auth_code"]:
                         st.components.v1.html(html_data,height=500)
                 except Exception:
                         None
+        if st.session_state["graf"]=="kms Acumulados": 
+                st.plotly_chart(fig)
