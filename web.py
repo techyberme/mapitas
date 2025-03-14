@@ -13,8 +13,11 @@ st.session_state["auth_code"] = query_params.get("code")
 
 if "code" in query_params and st.session_state["auth_code"] is None:
         st.rerun()  # Force a rerun to capture query parameters
-if "fig" not in st.session_state:  # ✅ Ensure 'fig' is always in session state
+if "fig" not in st.session_state:  
     st.session_state["fig"] = None
+if "map_html" not in st.session_state:    
+    st.session_state["map_html"] = None
+
 if "code" in query_params and st.session_state["auth_code"]:
         st.session_state["authenticated"] = True  # Mark user as authenticated
         st.write("✅ Ya estás registrado, ahora puedes ver tu mapa!")
@@ -36,24 +39,16 @@ if "code" in query_params and st.session_state["auth_code"]:
                         id_atleta= response["athlete"]["id"]
                         refresh_token=response["refresh_token"]
                         st.session_state["fig"]=actualizar(refresh_token)
+                        with open("./templates/stravastreamlit.html", "r") as f:
+                                st.session_state["map_html"] = f.read()
                         
                 except Exception as e:
                         #st.error(f"An error occurred: {e}")
                         None
-        st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
-        if st.session_state["graf"]=="Mapa" and st.session_state["button"]:            
-                try:
-                        path_to_html = "./templates/stravastreamlit.html"
-
-                        # Read file and keep in variable
-                        temp_path = f"/tmp/stravastreamlit.html"
-                        with open(temp_path,'r') as f: 
-                                html_data = f.read()
-
-                        ## Show in webpage
-                        st.components.v1.html(html_data,height=500)
-                except Exception:
-                        None
+        if st.session_state["button"]:
+                st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
+        if st.session_state["graf"] == "Mapa" and st.session_state["map_html"]:  
+                st.components.v1.html(st.session_state["map_html"], height=500)
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["fig"] is not None: 
                         st.pyplot(st.session_state["fig"])  # Use st.plotly_chart(fig) if it's Plotly
         elif st.session_state["graf"] == "kms Acumulados":
