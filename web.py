@@ -38,20 +38,15 @@ if "code" in query_params and st.session_state["auth_code"]:
                         id_atleta= response["athlete"]["id"]
                         refresh_token=response["refresh_token"]
                         st.session_state["fig"]=actualizar(refresh_token)
-                except Exception as e:
-                        st.error(f"An error occurred: {e}")
-                        st.warning("Es el error de la url")
+                        with open("./templates/stravastreamlit.html", "r") as f:
+                                st.session_state["map_html"] = f.read()
                         
-        st.session_state["graf"] = st.radio(" ",["Seleccione una opción",'Mapa', 'kms Acumulados']) 
-        if st.session_state["graf"] == "Mapa":  
-                try:
-                        path_to_html = "./templates/stravastreamlit.html"
-                        # Read file and keep in variable
-                        temp_path = f"/tmp/stravastreamlit.html"
-                        with open(temp_path,'r') as f: 
-                                html_data = f.read()
-                except Exception:
+                except Exception as e:
+                        #st.error(f"An error occurred: {e}")
                         None
+        st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
+        if st.session_state["graf"] == "Mapa" and st.session_state["map_html"]:  
+                st.components.v1.html(st.session_state["map_html"], height=500)
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["fig"] is not None: 
                         st.pyplot(st.session_state["fig"])  # Use st.plotly_chart(fig) if it's Plotly
         elif st.session_state["graf"] == "kms Acumulados":

@@ -1,5 +1,6 @@
 streamlit
 polyline
 folium
-matplotlib
+datetime
+matplotlib.pyplot
 numpy
