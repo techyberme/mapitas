@@ -54,10 +54,10 @@ def actualizar(refresh_token :str):
         year=int(str(fechain)[0:4])
         distancias[str(year)].append([int(dia),distancia])
         if deporte == "Walk":
-            gradiente= 255-int(distancia*255/40)
+            gradiente= 255-int(distancia*255/60)
             colores= f"rgb({gradiente}, 0, 0)"
         elif deporte== "Run":
-            gradiente=255 - int(distancia*255/20)
+            gradiente=255 - int(distancia*255/40)
 
             colores= f"rgb(0, {gradiente}, 0)"
         else:
@@ -65,6 +65,8 @@ def actualizar(refresh_token :str):
             colores= f"rgb(0, 0, {gradiente})"
         try:
             vel=round(60/(stats[i]["average_speed"]*3.6),2)
+            velm=int(vel)
+            vels=int((vel-velm)*60)
         except ZeroDivisionError:
             vel="-"
         if poly != "":
@@ -73,7 +75,7 @@ def actualizar(refresh_token :str):
             folium.PolyLine(
             listica,
             color=colores,
-            tooltip=f"Nombre: {nombre} \n , Distancia: {distancia} km \n , Velocidad = {vel} min/km"
+            tooltip=f"Nombre: {nombre} \n , Distancia: {distancia} km \n , Velocidad = {velm}:{vels} min/km"
             ).add_to(l)
     
     Fullscreen(position="topright").add_to(l)
