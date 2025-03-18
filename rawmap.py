@@ -102,7 +102,7 @@ def actualizar(refresh_token :str):
     temp_path = f"/tmp/stravastreamlit.html"
     l.save(temp_path)
     def kmsacumulados(distancias):
-        fig, ax = plt.subplots(figsize=(8, 5))
+        fig, ax = plt.subplots(figsize=(10, 4), dpi=100)
 
         # Loop through each year in the dictionary
         for year, data in distancias.items():
@@ -113,16 +113,17 @@ def actualizar(refresh_token :str):
 
             ax.plot(days, cumulative_km, marker="x",markersize=5, linestyle="-", label=f"Year {year}")
 
-        # Customize plot
-        ax.set_xlabel("Día")
-        ax.set_ylabel("kms")
-        ax.set_title("kms acumulados")
-        ax.grid(True)
-        ax.legend()
-        return(fig)
+        ax.set_xlabel("Día", fontsize=10)
+        ax.set_ylabel("Kms Acumulados", fontsize=10)
+        ax.set_title("Evolución de Kilometraje", fontsize=12)
+        ax.legend(fontsize=8)
+        ax.tick_params(axis='both', which='major', labelsize=8)
+    
+        plt.tight_layout()  # Critical for web display
+        return fig
     fig=kmsacumulados(distancias)
 
-    return(fig)
+    return fig
 
 
 
