@@ -108,7 +108,7 @@ def actualizar(refresh_token :str):
         for year, data in distancias.items():
             data = np.array(data)  # Convert to NumPy array
             days = np.flip(data[:, 0]) # Extract day numbers
-            distances = data[:, 1]  # Extract distances
+            distances = np.flip(data[:, 1])  # Extract distances
             cumulative_km = np.cumsum(distances)  # Compute cumulative sum
 
             ax.plot(days, cumulative_km, marker="x",markersize=5, linestyle="-", label=f"Year {year}")
