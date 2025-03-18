@@ -53,7 +53,7 @@ def actualizar(refresh_token :str):
         dia=datetime.strftime(fechain, "%j")  
         year=int(str(fechain)[0:4])
         distancias[str(year)].append([int(dia),distancia])
-        if deporte == "Walk" or "Hike":
+        if deporte in ["Walk","Hike"]:
             gradiente= 255-int(distancia*255/60)
             colores= f"rgb({gradiente}, 0, 0)"
         elif deporte== "Run":
