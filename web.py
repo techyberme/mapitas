@@ -6,7 +6,7 @@ st.title("Mapitas")
 st.subheader("Powered by :orange[Strava]")
 url = "https://www.strava.com/oauth/authorize?client_id=143763&redirect_uri=https://mapitas.streamlit.app&response_type=code&scope=activity:read_all"
 #st.write("Consigue los datos aqui: [link](%s)" % url)
-
+st.session_state["fig"]=None
     # Step 3: Retrieve the authorization code from the redirected URL
 query_params = st.query_params  # Capture URL parameters
 st.session_state["auth_code"] = query_params.get("code")
