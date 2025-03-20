@@ -102,7 +102,7 @@ def actualizar(refresh_token :str):
     temp_path = f"/tmp/stravastreamlit.html"
     l.save(temp_path)
     def kmsacumulados(distancias):
-        fig, ax = plt.subplots(figsize=(12, 4), dpi=120)
+        fig, ax = plt.subplots(figsize=(10, 4), dpi=100)
 
         # Loop through each year in the dictionary
         for year, data in distancias.items():
@@ -111,7 +111,7 @@ def actualizar(refresh_token :str):
             distances = np.flip(data[:, 1])  # Extract distances
             cumulative_km = np.cumsum(distances)  # Compute cumulative sum
 
-            ax.plot(days, cumulative_km, marker="o",markersize=5, linestyle="-", label=f"Year {year}")
+            ax.plot(days, cumulative_km, marker="x",markersize=5, linestyle="-", label=f"Year {year}")
 
         ax.set_xlabel("Día", fontsize=10)
         ax.set_ylabel("Kms Acumulados", fontsize=10)
