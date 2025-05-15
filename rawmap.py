@@ -92,55 +92,50 @@ def actualizar(refresh_token :str):
      &nbsp; Otros &nbsp; <i class="fa fa-minus" style="color:red"></i><br>
 </div>
 '''
-
-
-
-
-# Add the legend to the map
     l.get_root().html.add_child(folium.Element(legend_html))
     #l.save("./templates/stravastreamlit.html")
     temp_path = f"/tmp/stravastreamlit.html"
     l.save(temp_path)
-    def kmsacumulados(distancias):
-        plt.style.use('seaborn')  # Better default style
-        fig, ax = plt.subplots(figsize=(12, 4), dpi=120)  # Wider aspect ratio
+    # def kmsacumulados(distancias):
+    #     plt.style.use('seaborn')  # Better default style
+    #     fig, ax = plt.subplots(figsize=(12, 4), dpi=120)  # Wider aspect ratio
    
-        ax.set_xlim(0, 365)
-        ax.set_xticks(np.arange(0, 366, 50))
-        ax.xaxis.set_minor_locator(plt.MultipleLocator(25))
-        plt.xticks(rotation=30, ha='right', fontsize=9)
-        # Loop through each year in the dictionary
-        for year, data in distancias.items():
-            data = np.array(data)  # Convert to NumPy array
-            days = np.flip(data[:, 0]) # Extract day numbers
-            distances = np.flip(data[:, 1])  # Extract distances
-            cumulative_km = np.cumsum(distances)  # Compute cumulative sum
+    #     ax.set_xlim(0, 365)
+    #     ax.set_xticks(np.arange(0, 366, 50))
+    #     ax.xaxis.set_minor_locator(plt.MultipleLocator(25))
+    #     plt.xticks(rotation=30, ha='right', fontsize=9)
+    #     # Loop through each year in the dictionary
+    #     for year, data in distancias.items():
+    #         data = np.array(data)  # Convert to NumPy array
+    #         days = np.flip(data[:, 0]) # Extract day numbers
+    #         distances = np.flip(data[:, 1])  # Extract distances
+    #         cumulative_km = np.cumsum(distances)  # Compute cumulative sum
 
-            ax.plot(days, cumulative_km, 
-                marker="o", 
-                markersize=4,
-                linewidth=1.5, 
-                label=f"{year}")
+    #         ax.plot(days, cumulative_km, 
+    #             marker="o", 
+    #             markersize=4,
+    #             linewidth=1.5, 
+    #             label=f"{year}")
 
-        plt.subplots_adjust(bottom=0.15, left=0.08, right=0.95)
+    #     plt.subplots_adjust(bottom=0.15, left=0.08, right=0.95)
     
-        # Improve labels and legend
-        ax.set_xlabel("Día del año", fontsize=10, labelpad=8)
-        ax.set_ylabel("Kms Acumulados", fontsize=10, labelpad=8)
-        ax.set_title("Evolución de Kilometraje", fontsize=12, pad=15)
+    #     # Improve labels and legend
+    #     ax.set_xlabel("Día del año", fontsize=10, labelpad=8)
+    #     ax.set_ylabel("Kms Acumulados", fontsize=10, labelpad=8)
+    #     ax.set_title("Evolución de Kilometraje", fontsize=12, pad=15)
         
-        # Configure grid and ticks
-        ax.yaxis.set_major_locator(plt.MaxNLocator(8))
-        ax.grid(True, which='major', linestyle='--', linewidth=0.5, alpha=0.7)
+    #     # Configure grid and ticks
+    #     ax.yaxis.set_major_locator(plt.MaxNLocator(8))
+    #     ax.grid(True, which='major', linestyle='--', linewidth=0.5, alpha=0.7)
         
-        # Position legend outside
-        ax.legend(fontsize=9, loc='upper left', bbox_to_anchor=(1, 1))
+    #     # Position legend outside
+    #     ax.legend(fontsize=9, loc='upper left', bbox_to_anchor=(1, 1))
         
-        plt.tight_layout()
-        return fig
-    fig=kmsacumulados(distancias)
+    #     plt.tight_layout()
+    #     return fig
+    # fig=kmsacumulados(distancias)
 
-    return fig
+    #return fig
 
 
 
