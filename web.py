@@ -56,5 +56,6 @@ if "code" in query_params and st.session_state["auth_code"]:
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
                 # if st.session_state["fig"]:
                         st.pyplot(st.session_state["fig"]) 
+                        print(st.session_state["fig"])
                 # else:
                 #         st.warning("No figure available to display.") 
