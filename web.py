@@ -52,7 +52,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         ## Show in webpage
                         st.components.v1.html(html_data,height=500)
                 except Exception:
-                        None
+                        st.write(Exception)
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
                 # if st.session_state["fig"]:
                         st.pyplot(st.session_state["fig"]) 
