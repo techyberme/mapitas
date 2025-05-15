@@ -35,7 +35,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         id_atleta= response["athlete"]["id"]
                         refresh_token=response["refresh_token"]
                         st.session_state["fig"]=actualizar(refresh_token)
-                        
+                        st.rerun()  # Force a rerun to capture query parameters
                 except Exception as e:
                         #st.error(f"An error occurred: {e}")
                         st.write(Exception)
