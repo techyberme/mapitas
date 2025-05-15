@@ -79,7 +79,7 @@ def actualizar(refresh_token :str):
             ).add_to(l)
     
     Fullscreen(position="topright").add_to(l)
-    map_title = "Las rutas"
+    map_title = "Tus rutas"
     title_html = f'<h1 style="position:absolute;z-index:100000;left:40vw" >{map_title}</h1>'
     l.get_root().html.add_child(folium.Element(title_html))
     legend_html = '''

@@ -54,7 +54,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                 except Exception:
                         None
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
-                if st.session_state["fig"]:
-                        st.pyplot(st.session_state["fig"])  # Use st.plotly_chart(fig) if it's Plotly
-                else:
-                        st.warning("No figure available to display.") 
+                # if st.session_state["fig"]:
+                        st.pyplot(st.session_state["fig"]) 
+                # else:
+                #         st.warning("No figure available to display.") 
