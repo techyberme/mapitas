@@ -38,7 +38,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         
                 except Exception as e:
                         #st.error(f"An error occurred: {e}")
-                        None
+                        st.write(Exception)
         st.session_state["graf"] = st.radio(" ",['Mapa', 'kms Acumulados']) 
         if st.session_state["graf"]=="Mapa" and st.session_state["button"]:            
                 try:
