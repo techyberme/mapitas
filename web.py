@@ -14,7 +14,7 @@ if "code" in query_params and st.session_state["auth_code"] is None:
 
 if "code" in query_params and st.session_state["auth_code"]:
         st.session_state["authenticated"] = True  # Mark user as authenticated
-        st.write("✅ Ya estás registrado, ahora puedes ver tu what!")
+        st.write("✅ Ya estás registrado, ahora puedes ver tu mapa!")
 
 else:
         st.write("🔗 Consigue los datos aqui: [link](%s)" % url)
@@ -47,7 +47,7 @@ if "code" in query_params and st.session_state["auth_code"]:
                         st.components.v1.html(html_data,height=500)
                 except Exception:
                         None
-                        #st.write(Exception)
+                        st.write(Exception)
         if st.session_state["graf"]=="kms Acumulados" and st.session_state["button"]: 
                 # if st.session_state["fig"]:
                         st.pyplot(st.session_state["fig"]) 
